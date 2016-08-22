@@ -12,10 +12,15 @@ port = 80
 server_ip = socket.gethostbyname(server)
 print(server_ip)
 
-request = "GET \ HTTP/1,1\nHost: "+server+"\n\n"
-s.connect((server,port))
+request = "GET / \nHost: "+server+"\n\n"
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((server, 80))
 s.send(request.encode())
 
 result = s.recv(4096)
 
-print(result)
+#print(result)
+
+while(len(result) > 0):
+    print(result)
+    result = s.recv(1024)
